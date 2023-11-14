@@ -2,12 +2,16 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
 
-// Components
+//// Core Imports
+// Pages
 import Chat from './Pages/Chat';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+// Components
 import NavBar from './Components/NavBar';
+// Contexts
 import { Auth } from './Context/Auth';
+import { AppProvider } from './Context/App';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +21,7 @@ function App() {
     const { user } = useContext(Auth);
 
     return (
-        <>
+        <AppProvider user={ user }>
             <NavBar />
             <Container>
                 <Routes>
@@ -27,7 +31,7 @@ function App() {
                     <Route path='*' element={ <Navigate to="/" /> }/>
                 </Routes>
             </Container>
-        </>
+        </AppProvider>
     );
 }
 

@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         setRegisterError(null);
 
         // POST request to the API
-        const response = await postRequest(`${baseUrl}/users/register`, JSON.stringify(registerInfo));
+        const response = await postRequest(`${baseUrl}/app/users/register`, JSON.stringify(registerInfo));
         // Registration done
         setIsRegisterLoading(false);
 

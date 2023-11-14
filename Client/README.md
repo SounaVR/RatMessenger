@@ -1,0 +1,3 @@
+I wanted to use next or vue instead but I've been circling React for a while...
+
+I'll switch from bootstrap to Tailwind later.

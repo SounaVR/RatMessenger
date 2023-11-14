@@ -18,11 +18,11 @@ mongoose
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use('/api/users', usersRoute);
+app.use('/users', usersRoute);
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Hello world');
+    res.send('Hello API watchers');
 });
 
 // Port listening

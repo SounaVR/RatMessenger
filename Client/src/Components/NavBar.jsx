@@ -7,7 +7,7 @@ import { Auth } from '../Context/Auth';
 const NavBar = () => {
     const { user, logoutUser } = useContext(Auth);
 
-    return <Navbar bg="dark" className="mb-4" style={{ height: "3.75rem" }}>
+    return <Navbar bg="dark" style={{ height: "3.75rem" }}>
         <Container>
             <h2>
                 <Link to="/" className="link-light text-decoration-none">RatMessenger</Link>      

@@ -15,7 +15,6 @@ import { AppProvider } from './Context/App';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
 
 function App() {
     const { user } = useContext(Auth);
@@ -23,14 +22,12 @@ function App() {
     return (
         <AppProvider user={ user }>
             <NavBar />
-            <Container>
                 <Routes>
                     <Route path='/' element={ user ? <Chat/> : <Login/> }/>
                     <Route path='/login' element={ user ? <Chat/> : <Login/> }/>
                     <Route path='/register' element={ user ? <Chat/> : <Register/> }/>
                     <Route path='*' element={ <Navigate to="/" /> }/>
                 </Routes>
-            </Container>
         </AppProvider>
     );
 }

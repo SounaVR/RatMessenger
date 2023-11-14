@@ -20,7 +20,7 @@ const registration = async (req, res) => {
         if (user) return res.status(400).json('User already exists.');
         if (!username || !email || !password) return res.status(400).json('All fields are required.');
         if (!validator.isEmail(email)) return res.status(400).json('Email must be valid.');
-        if (!validator.isStrongPassword(password)) return res.status(400).json('Password must be valid.');
+        if (!validator.isStrongPassword(password)) return res.status(400).json('Password must contains at least 1 lowercase, 1 uppercase and 1 special character.');
 
         // Generating the user by the db model
         user = new model({ username, email, password });

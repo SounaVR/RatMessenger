@@ -3,7 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const usersRoute = require('./Routes/users');
+
+// Routes
+const appRoute = require('./Routes/app');
 
 // Instantiate the server
 const app = express();
@@ -18,7 +20,7 @@ mongoose
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use('/users', usersRoute);
+app.use('/app', appRoute);
 
 // Routes
 app.get('/', (req, res) => {

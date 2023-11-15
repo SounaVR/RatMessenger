@@ -1,37 +1,31 @@
-// Imports
+// Chat component
 import { useContext } from "react";
 import { App } from "../Context/App";
 import { Auth } from '../Context/Auth';
 import UserServer from '../Components/app/UserServer';
-
-// CSS
-import { Stack } from 'react-bootstrap';
+import CreateServer from '../Components/app/CreateServer';
+import { Stack } from 'react-bootstrap'; // Importing Stack component
 
 const Chat = () => {
     const { user } = useContext(Auth);
     const { userServers, isUserServersLoading, userServersError } = useContext(App);
 
     return (
-        <>
-            { userServers?.length < 1 ? null : (
-                <Stack direction="horizontal" gap={ 4 } className="align-items-start">
-                    <Stack className="messages-box flex-grow-0 pe-3" gap={ 3 }>
-                        { isUserServersLoading && <p>Loading servers...</p> }
-                        { userServers?.map((server, i) =>
-                            {
-                                return (
-                                    <div key={ i }>
-                                        <UserServer server={ server } user= { user } />
-                                    </div>
-                                )
-                            })
-                        }
-                    </Stack>
-                    <p>ChatBox</p>
-                </Stack>
+        <div id="chat-container">
+            {userServers?.length < 0 ? null : (
+                <div className="sidebar">
+                    {isUserServersLoading && <p>Loading servers...</p>}
+                    {userServers?.map((server, i) => (
+                        <UserServer key={i} server={server} user={user} />
+                    ))}
+                    <CreateServer />
+                </div>
             )}
-        </>
+            <div className="main-content">
+                <p style={{ color: "white" }}>ChatBox</p>
+            </div>
+        </div>
     );
 }
- 
+
 export default Chat;

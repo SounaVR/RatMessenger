@@ -1,33 +1,52 @@
-import { Stack } from "react-bootstrap";
-import pfp from '../../Assets/avatar.jpg'
+// UserServer component
+import { useState, useRef, useEffect } from 'react';
+import pfp from '../../Assets/avatar.jpg';
 
-const userServer = ({ server, user }) => {
+const UserServer = ({ server, user }) => {
+    const [isTooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+    const tooltipRef = useRef(null);
+
+    const handleMouseEnter = () => {
+        setTooltipVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+        setTooltipVisible(false);
+    };
+
+    useEffect(() => {
+        if (tooltipRef.current) {
+            const serverRect = tooltipRef.current.parentElement.getBoundingClientRect();
+            const tooltipRect = tooltipRef.current.getBoundingClientRect();
+            const tooltipTop = serverRect.top + window.scrollY + serverRect.height / 2 - tooltipRect.height / 2;
+            const tooltipLeft = serverRect.left + window.scrollX + serverRect.width + 5;
+
+            setTooltipPosition({
+                top: tooltipTop,
+                left: tooltipLeft,
+            });
+        }
+    }, [isTooltipVisible]);
+
     return (
-        <Stack
-            direction="horizontal"
-            gap={ 3 }
-            className="user-card align-items-center p-2
-            justify-content-between"
-            role="button"
+        <div
+            className="server-tooltip"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
-            <div className="d-flex">
-                <div className="me-2">
-                    <img className="rounded-circle" src={pfp} height="35px"></img>
+            <img className="rounded-circle" src={pfp} height="35px" alt="User Avatar" />
+            {isTooltipVisible && (
+                <div
+                    className="tooltiptext"
+                    style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px` }}
+                    ref={tooltipRef}
+                >
+                    {server?.name}
                 </div>
-                <div className="text-content">
-                    <div className="name">{ server?.name }</div>
-                    <div className="text">Text Message</div>
-                </div>
-            </div>
-            <div className="d-flex flex-cloumn align-items-end">
-                <div className="date">
-                    12/12/2022
-                </div>
-                <div className="this-user-notifications">2</div>
-                <span className="user-online"></span>
-            </div>
-        </Stack>
+            )}
+        </div>
     );
 }
- 
-export default userServer;
+
+export default UserServer;

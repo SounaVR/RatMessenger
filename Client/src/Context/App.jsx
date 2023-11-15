@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { baseUrl, getRequest, postRequest } from '../Utils/Services';
 
 export const App = createContext();
@@ -8,6 +8,7 @@ export const AppProvider = ({ children, user }) => {
     const [userServers, setUserServers] = useState(null);
     const [isUserServersLoading, setIsUserServersLoading] = useState(false);
     const [userServersError, setUserServersError] = useState(null);
+    const [serverInfo, setServerInfo] = useState({ serverName: "", userId: "" });
 
     useEffect(() => {
         const getUserServers = async () => {
@@ -33,12 +34,31 @@ export const AppProvider = ({ children, user }) => {
         getUserServers()
     }, [user]);
 
+    const updateServerInfo = useCallback((info) => {
+        setServerInfo(info);
+        console.log(info)
+    }, []);
+
+    const createServer = useCallback(async (e) => {
+        e.preventDefault();
+        const response = await postRequest(`${baseUrl}/app/servers/create`, JSON.stringify(serverInfo));
+        if (response.error) {
+            return console.log('Error creating a server', response);
+        }
+
+        setUserServers((prev) => [...prev, response]);
+        console.log(userServers)
+    }, [serverInfo]);
+
     return (
         <App.Provider
             value={{
                 userServers,
                 isUserServersLoading,
-                userServersError
+                userServersError,
+                createServer,
+                serverInfo,
+                updateServerInfo
             }}
         >
             { children }

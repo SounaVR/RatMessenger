@@ -4,11 +4,11 @@ import { App } from "../Context/App";
 import { Auth } from '../Context/Auth';
 import UserServer from '../Components/app/UserServer';
 import CreateServer from '../Components/app/CreateServer';
-import { Stack } from 'react-bootstrap'; // Importing Stack component
 
 const Chat = () => {
     const { user } = useContext(Auth);
     const { userServers, isUserServersLoading, userServersError } = useContext(App);
+    userServers?.map((e) => (console.log(e.channels)))
 
     return (
         <div id="chat-container">
@@ -22,7 +22,7 @@ const Chat = () => {
                 </div>
             )}
             <div className="main-content">
-                <p style={{ color: "white" }}>ChatBox</p>
+                
             </div>
         </div>
     );

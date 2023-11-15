@@ -10,7 +10,7 @@ const NavBar = () => {
     return <Navbar bg="dark" style={{ height: "3.75rem" }}>
         <Container>
             <h2>
-                <Link to="/" className="link-light text-decoration-none">RatMessenger</Link>      
+                <Link to="/channels/@me" className="link-light text-decoration-none">RatMessenger</Link>      
             </h2>
             {/* if the user exists, turn off the span */}
             {user && (

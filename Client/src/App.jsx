@@ -4,9 +4,10 @@ import { useContext } from 'react';
 
 //// Core Imports
 // Pages
-import Chat from './Pages/Chat';
+import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import Error from './Pages/Error';
 // Components
 import NavBar from './Components/NavBar';
 // Contexts
@@ -23,10 +24,11 @@ function App() {
         <AppProvider user={ user }>
             <NavBar />
                 <Routes>
-                    <Route path='/' element={ user ? <Chat/> : <Login/> }/>
-                    <Route path='/login' element={ user ? <Chat/> : <Login/> }/>
-                    <Route path='/register' element={ user ? <Chat/> : <Register/> }/>
-                    <Route path='*' element={ <Navigate to="/" /> }/>
+                    <Route path='/channels/@me' element={ user ? <Home/> : <Login/> }/>
+                    <Route path='/login' element={ user ? <Home/> : <Login/> }/>
+                    <Route path='/register' element={ user ? <Home/> : <Register/> }/>
+                    <Route path='*' element={ <Navigate to="/error" /> }/>
+                    <Route path='/error' element={ <Error /> }/>
                 </Routes>
         </AppProvider>
     );

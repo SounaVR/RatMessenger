@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
         setLoginError(null);
 
         // POST request to the API
-        const response = await postRequest(`${baseUrl}/users/login`, JSON.stringify(loginInfo));
+        const response = await postRequest(`${baseUrl}/app/users/login`, JSON.stringify(loginInfo));
         // Login done
         setIsLoginLoading(false);
 

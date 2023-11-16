@@ -1,15 +1,17 @@
 // Home component
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { App } from '../Context/App';
 import UserServer from '../Components/app/UserServer';
+import UserChannel from '../Components/app/UserChannel';
 import CreateServer from '../Components/app/CreateServer';
-import ChannelList from '../Components/app/ChannelList';
+import CreateChannel from '../Components/app/CreateChannel';
 
 const Home = () => {
-    const { userServers, isUserServersLoading, userServersError, channelInfo, updateChannelInfo } = useContext(App);
+    const { userServers, isUserServersLoading, channelInfo, updateChannelInfo, userChannels, setIsChannelsNotLoading } = useContext(App);
 
     const handleServerClick = (serverId) => {
         updateChannelInfo({ ...channelInfo, serverId: serverId })
+        setIsChannelsNotLoading(true);
     };
 
     return (
@@ -24,7 +26,18 @@ const Home = () => {
                 </div>
             )}
             <div className="main-content">
-                <ChannelList channelInfo={channelInfo} updateChannelInfo={updateChannelInfo}/>
+                
+                {!userChannels && (
+                    <p>Select or create a server first</p>
+                )}
+                {userChannels && (
+                    <div>
+                        <CreateChannel />
+                        {userChannels?.map((channel, i) => (
+                            <UserChannel key={i} channel={channel} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

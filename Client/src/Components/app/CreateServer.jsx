@@ -7,8 +7,9 @@ import { Auth } from '../../Context/Auth';
 const createServer = () => {
     const { user } = useContext(Auth);
     const { createServer, serverInfo, updateServerInfo } = useContext(App);
+    
+    // Create server Modal
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -20,7 +21,7 @@ const createServer = () => {
             height="35px"
             role="button"
             onClick={() => handleShow()}
-            style={{ marginTop: "10px", marginBottom: "10px" }}
+            style={{ marginTop: "5px", marginBottom: "10px" }}
         ></img>
 
         <Modal show={show} onHide={handleClose}>

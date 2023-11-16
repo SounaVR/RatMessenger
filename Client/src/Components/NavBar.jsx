@@ -12,7 +12,7 @@ const NavBar = () => {
             <h2>
                 <Link to="/channels/@me" className="link-light text-decoration-none">RatMessenger</Link>      
             </h2>
-            {/* if the user exists, turn off the span */}
+            {/* if the user exists, display the span */}
             {user && (
                 <span className="text-warning">Logged in as {user?.username}</span>
             )}

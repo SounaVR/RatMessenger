@@ -23,6 +23,44 @@ h2 {
     display: flex;
 }
 
+/* CreateChannel Modal */
+.modal-content, .form-check-input {
+    color: white;
+    background-color: rgb(53, 53, 53);
+}
+
+label.form-label {
+    font-size: small;
+    font-weight: bold;
+}
+
+.radio-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: rgb(40, 40, 40);
+    padding: 10px;
+}
+
+.radio-input {
+    order: 2; /* Move the input to the right side */
+}
+
+.radio-label {
+    order: 1; /* Move the label to the left side */
+}
+
+span.input-group-text, input.channelName, input.channelName:focus {
+    color: white;
+    background-color: rgb(40, 40, 40);
+    border: none;
+}
+
+.form-control::placeholder {
+    color: rgb(138, 138, 138);
+}
+
 /* Main content styles */
 .main-content {
     flex: 1;
@@ -65,7 +103,6 @@ h2 {
 .server-tooltip:hover .tooltiptext {
     visibility: visible;
 }
-
 
 ::-webkit-scrollbar {
     display: none;

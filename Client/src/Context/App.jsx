@@ -13,7 +13,7 @@ export const AppProvider = ({ children, user }) => {
     const [userChannels, setUserChannels] = useState(null);
     const [isChannelsNotLoading, setIsChannelsNotLoading] = useState(false);
     const [channelError, setChannelError] = useState(null);
-    const [channelInfo, setChannelInfo] = useState({ serverId: "", channelName: "", channelType: "" });
+    const [channelInfo, setChannelInfo] = useState({ serverId: "", channelName: "", channelType: "Text" });
 
     useEffect(() => {
         const getUserServers = async () => {

@@ -6,6 +6,9 @@ import UserChannel from '../Components/app/UserChannel';
 import CreateServer from '../Components/app/CreateServer';
 import CreateChannel from '../Components/app/CreateChannel';
 
+// CSS
+import '../Styles/home.css';
+
 const Home = () => {
     const { userServers, isUserServersLoading, channelInfo, updateChannelInfo, userChannels, setIsChannelsNotLoading } = useContext(App);
 
@@ -31,7 +34,7 @@ const Home = () => {
                     <p>Select or create a server first</p>
                 )}
                 {userChannels && (
-                    <div>
+                    <div className="channels-list">
                         <CreateChannel />
                         {userChannels?.map((channel, i) => (
                             <UserChannel key={i} channel={channel} />

@@ -1,0 +1,73 @@
+#chat-container {
+    display: flex;
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    padding: 10px;
+    background: rgb(40, 40, 40);
+}
+
+/* Sidebar styles */
+.sidebar {
+    height: calc(100vh - 3.75rem);
+    width: 75px;
+    background-color: rgb(53, 53, 53);
+    overflow-y: scroll;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tooltip container */
+.server-tooltip {
+    position: relative;
+    padding: 8px;
+}
+
+/* Tooltip text */
+.server-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: fixed;
+    z-index: 2;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.server-tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+  
+
+
+.channels-list {
+    width: 150px;
+}
+
+.user-channel {
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    overflow: hidden;
+    white-space: nowrap;
+}
+  
+.user-channel:hover {
+    background-color: rgb(53, 53, 53);
+}
+
+.user-channel p {
+    padding: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

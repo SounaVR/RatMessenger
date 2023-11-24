@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
 import { Modal, Button, Form } from 'react-bootstrap';
-import addServerButton from '../../Assets/addServer.png';
 import { App } from '../../Context/App';
 import { Auth } from '../../Context/Auth';
 
@@ -13,16 +13,16 @@ const createServer = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // Checks if the server name is empty
+    const isServerNameEmpty = !serverInfo.serverName.trim(); 
+
     return (
     <>
-        <img
-            className="rounded-circle"
-            src={addServerButton}
-            height="35px"
+        <p
             role="button"
             onClick={() => handleShow()}
-            style={{ marginTop: "5px", marginBottom: "10px" }}
-        ></img>
+            style={{ color: "grey",fontSize: "35px" }}
+        ><FaPlusCircle /></p>
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -31,17 +31,23 @@ const createServer = () => {
             <Modal.Body>
                 <Form onSubmit={createServer}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Server name</Form.Label>
+                        <Form.Label>SERVER NAME</Form.Label>
                         <Form.Control
+                            className='channelName shadow-none'
                             type="text"
-                            placeholder="Put a name..."
+                            placeholder={`${user.username}'s server`}
                             autoFocus
                             onChange={(e) =>
                                 updateServerInfo({ ...serverInfo, serverName: e.target.value, userId: user._id })
                             }
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={handleClose}>
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={handleClose}
+                        disabled={isServerNameEmpty}
+                    >
                         Create
                     </Button>
                 </Form>

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { Modal, Button, Form, InputGroup } from 'react-bootstrap';
+import { FaPlusCircle, FaHashtag } from 'react-icons/fa';
 import { App } from '../../Context/App';
 
 const CreateChannel = () => {
@@ -10,13 +11,16 @@ const CreateChannel = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // Checks if the channel name is empty
+    const isChannelNameEmpty = !channelInfo.channelName.trim(); 
+
     return (
         <>
             <p
-                style={{color: "grey", fontSize: "30px", width: "0px", marginBottom: "0px"}}
+                style={{ color: "white", fontSize: "30px", width: "0px"}}
                 onClick={() => handleShow()}
                 role="button"
-            >+</p>
+            ><FaPlusCircle /></p>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -27,35 +31,35 @@ const CreateChannel = () => {
                         <Form.Group>
                             <Form.Label>CHANNEL TYPE</Form.Label>
                             <div key="channelType" id="channelType">
-                                <div className="radio-option">
+                                <div
+                                    className={`radio-option ${channelInfo.channelType === 'Text' ? 'selected' : ''}`} 
+                                    onClick={() => updateChannelInfo({ ...channelInfo, channelType: 'Text' })}
+                                >
                                     <Form.Check
                                         defaultChecked
-                                        value="Text"
                                         name="group1"
                                         type="radio"
                                         className="radio-input"
-                                        onChange={(e) => {
-                                            updateChannelInfo({ ...channelInfo, channelType: e.target.value });
-                                        }}
+                                        checked={channelInfo.channelType === 'Text'}
                                     />
                                     <span className="radio-label">Text</span>
                                 </div>
-                                <div className="radio-option">
+                                <div
+                                    className={`radio-option ${channelInfo.channelType === 'Voice' ? 'selected' : ''}`} 
+                                    onClick={() => updateChannelInfo({ ...channelInfo, channelType: 'Voice' })}
+                                >
                                     <Form.Check
-                                        value="Voice"
                                         name="group1"
                                         type="radio"
                                         className="radio-input"
-                                        onChange={(e) => {
-                                            updateChannelInfo({ ...channelInfo, channelType: e.target.value });
-                                        }}
+                                        checked={channelInfo.channelType === 'Voice'}
                                     />
                                     <span className="radio-label">Voice</span>
                                 </div>
                             </div>
                             <Form.Label>CHANNEL NAME</Form.Label>
                             <InputGroup>
-                                <InputGroup.Text>#</InputGroup.Text>
+                                <InputGroup.Text><FaHashtag /></InputGroup.Text>
                                 <Form.Control
                                     className='channelName shadow-none'
                                     type="text"
@@ -69,7 +73,12 @@ const CreateChannel = () => {
                         </Form.Group>
                         
                         <br />
-                        <Button variant="primary" type="submit" onClick={handleClose}>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            onClick={handleClose}
+                            disabled={isChannelNameEmpty}
+                        >
                             Create Channel
                         </Button>
                     </Form>

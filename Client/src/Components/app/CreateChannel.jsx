@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { Modal, Button, Form, InputGroup } from 'react-bootstrap';
-import { FaPlusCircle, FaHashtag } from 'react-icons/fa';
+import { FaPlusCircle, FaHashtag, FaVolumeUp } from 'react-icons/fa';
 import { App } from '../../Context/App';
 
 const CreateChannel = () => {
@@ -8,6 +8,7 @@ const CreateChannel = () => {
 
     // Create channel Modal
     const [show, setShow] = useState(false);
+    const [isVoiceChannel, setIsVoiceChannel] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -33,25 +34,32 @@ const CreateChannel = () => {
                             <div key="channelType" id="channelType">
                                 <div
                                     className={`radio-option ${channelInfo.channelType === 'Text' ? 'selected' : ''}`} 
-                                    onClick={() => updateChannelInfo({ ...channelInfo, channelType: 'Text' })}
+                                    onClick={() => {
+                                        updateChannelInfo({ ...channelInfo, channelType: 'Text' });
+                                        setIsVoiceChannel(!isVoiceChannel);
+                                    }}
                                 >
                                     <Form.Check
-                                        defaultChecked
                                         name="group1"
                                         type="radio"
                                         className="radio-input"
+                                        readOnly
                                         checked={channelInfo.channelType === 'Text'}
                                     />
                                     <span className="radio-label">Text</span>
                                 </div>
                                 <div
                                     className={`radio-option ${channelInfo.channelType === 'Voice' ? 'selected' : ''}`} 
-                                    onClick={() => updateChannelInfo({ ...channelInfo, channelType: 'Voice' })}
+                                    onClick={() => {
+                                        updateChannelInfo({ ...channelInfo, channelType: 'Voice' });
+                                        setIsVoiceChannel(!isVoiceChannel);
+                                    }}
                                 >
                                     <Form.Check
                                         name="group1"
                                         type="radio"
                                         className="radio-input"
+                                        readOnly
                                         checked={channelInfo.channelType === 'Voice'}
                                     />
                                     <span className="radio-label">Voice</span>
@@ -59,7 +67,7 @@ const CreateChannel = () => {
                             </div>
                             <Form.Label>CHANNEL NAME</Form.Label>
                             <InputGroup>
-                                <InputGroup.Text><FaHashtag /></InputGroup.Text>
+                                <InputGroup.Text>{isVoiceChannel ? <FaVolumeUp /> : <FaHashtag />}</InputGroup.Text>
                                 <Form.Control
                                     className='channelName shadow-none'
                                     type="text"

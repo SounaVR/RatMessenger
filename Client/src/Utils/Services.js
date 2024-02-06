@@ -1,9 +1,12 @@
-export const baseUrl = "https://souna.ovh/api";
+export const baseUrl = "http://localhost:5000";
 
-export const postRequest = async(url, body) => {
+export const postRequest = async (url, body, token) => {
     const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
         body
     });
 
@@ -24,8 +27,12 @@ export const postRequest = async(url, body) => {
     return data;
 };
 
-export const getRequest = async (url) => {
-    const response = await fetch(url);
+export const getRequest = async (url, token) => {
+    const response = await fetch(url, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+    });
 
     const data = await response.json();
 

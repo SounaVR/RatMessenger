@@ -27,7 +27,7 @@ function App() {
                     <Route path='/channels/@me' element={ user ? <Home/> : <Login/> }/>
                     <Route path='/login' element={ user ? <Home/> : <Login/> }/>
                     <Route path='/register' element={ user ? <Home/> : <Register/> }/>
-                    <Route path='*' element={ <Navigate to="/error" /> }/>
+                    <Route path='*' element={ <Navigate to="/channels/@me" /> }/>
                     <Route path='/error' element={ <Error /> }/>
                 </Routes>
         </AppProvider>

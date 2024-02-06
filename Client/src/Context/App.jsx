@@ -22,7 +22,7 @@ export const AppProvider = ({ children, user }) => {
                 setIsUserServersLoading(true);
                 setUserServersError(null);
                 // GET request to the API
-                const response = await getRequest(`${baseUrl}/app/servers/${user?._id}`);
+                const response = await getRequest(`${baseUrl}/app/servers/${user?._id}`, user.token);
                 // Done loading
                 setIsUserServersLoading(false);
                 
@@ -45,7 +45,7 @@ export const AppProvider = ({ children, user }) => {
                 setChannelError(null);
 
                 // GET request to the API
-                const response = await getRequest(`${baseUrl}/app/servers/channels/${channelInfo?.serverId}`);
+                const response = await getRequest(`${baseUrl}/app/servers/channels/${channelInfo?.serverId}`, user.token);
                 
                 if (Array.isArray(response)) {
                     // Done loading
@@ -75,7 +75,7 @@ export const AppProvider = ({ children, user }) => {
 
     const createServer = useCallback(async (e) => {
         e.preventDefault();
-        const response = await postRequest(`${baseUrl}/app/servers/create`, JSON.stringify(serverInfo));
+        const response = await postRequest(`${baseUrl}/app/servers/create`, JSON.stringify(serverInfo), user.token);
         if (response.error) {
             return console.log('Error creating a server', response);
         }
@@ -85,7 +85,7 @@ export const AppProvider = ({ children, user }) => {
 
     const createChannel = useCallback(async (e) => {
         e.preventDefault();
-        const response = await postRequest(`${baseUrl}/app/servers/channels/create`, JSON.stringify(channelInfo));
+        const response = await postRequest(`${baseUrl}/app/servers/channels/create`, JSON.stringify(channelInfo), user.token);
         if (response.error) {
             return console.log('Error creating a channel', response);
         }

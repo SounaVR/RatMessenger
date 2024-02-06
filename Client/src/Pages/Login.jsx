@@ -18,6 +18,7 @@ const Login = () => {
                         <h2>Login</h2>
                         
                         <Form.Control
+                            autoComplete='username'
                             type="email"
                             placeholder="Email"
                             onChange={(e) =>
@@ -25,6 +26,7 @@ const Login = () => {
                             }
                         />
                         <Form.Control
+                            autoComplete='current-password'
                             type="password"
                             placeholder="Password"
                             onChange={(e) => 
@@ -37,7 +39,7 @@ const Login = () => {
                         {
                             loginError?.error &&
                             <Alert variant="danger">
-                                <p>{loginError?.errorMessage}</p>
+                                <p className="black-text">{loginError?.errorMessage}</p>
                             </Alert>
                         }
                     </Stack>

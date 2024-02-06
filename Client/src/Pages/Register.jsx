@@ -45,7 +45,7 @@ const Register = () => {
                         {
                             registerError?.error &&
                             <Alert variant="danger">
-                                <p>{registerError?.errorMessage}</p>
+                                <p className="black-text">{registerError?.errorMessage}</p>
                             </Alert>
                         }
                     </Stack>

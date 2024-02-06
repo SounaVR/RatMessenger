@@ -20,7 +20,7 @@ const UserServer = ({ server, handleServerClick }) => {
             const serverRect = tooltipRef.current.parentElement.getBoundingClientRect();
             const tooltipRect = tooltipRef.current.getBoundingClientRect();
             const tooltipTop = serverRect.top + window.scrollY + serverRect.height / 2 - tooltipRect.height / 2;
-            const tooltipLeft = serverRect.left + window.scrollX + serverRect.width + 5;
+            const tooltipLeft = serverRect.left + window.scrollX + serverRect.width + 9;
 
             setTooltipPosition({
                 top: tooltipTop,

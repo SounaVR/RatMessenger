@@ -13,8 +13,19 @@ const createServer = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // Checks if the server name is empty
-    const isServerNameEmpty = !serverInfo.serverName.trim(); 
+    const handleCreateServer = () => {
+        // Check if the serverName is empty and use the placeholder in that case
+        const finalServerName = serverInfo.serverName.trim() ? serverInfo.serverName : `${user.username}'s server`;
+
+        // Update the serverInfo with the final serverName
+        updateServerInfo({ ...serverInfo, serverName: finalServerName, userId: user._id });
+
+        // Call createServer with the final serverName
+        createServer(finalServerName);
+
+        // Close the modal
+        handleClose();
+    };
 
     return (
     <>
@@ -45,8 +56,7 @@ const createServer = () => {
                     <Button
                         variant="primary"
                         type="submit"
-                        onClick={handleClose}
-                        disabled={isServerNameEmpty}
+                        onClick={handleCreateServer}
                     >
                         Create
                     </Button>

@@ -1,23 +1,23 @@
-#chat-container {
+.app-container {
     display: flex;
-}
-
-/* Main content styles */
-.main-content {
-    flex: 1;
-    padding: 10px;
-    background: rgb(40, 40, 40);
+    height: calc(100vh - 3.75rem);
 }
 
 /* Sidebar styles */
-.sidebar {
-    height: calc(100vh - 3.75rem);
+.servers-sidebar {
     width: 75px;
     background-color: rgb(53, 53, 53);
     overflow-y: scroll;
     align-items: center;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+}
+
+.channels-sidebar {
+    padding: 10px;
+    background: rgb(58, 58, 58);
+    max-width: 170px;
 }
 
 /* Tooltip container */
@@ -44,7 +44,7 @@
     visibility: visible;
 }
 
-::-webkit-scrollbar {
+.servers-sidebar::-webkit-scrollbar {
     display: none;
 }
   
@@ -70,4 +70,131 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+
+
+
+/* Chat section */
+.chat {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    background-color: rgb(43, 43, 43);
+}
+  
+/* Chat header */
+.chat h2 {
+    font-size: 18px;
+}
+  
+/* Message list */
+.message-list {
+    flex: 2;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+}
+  
+/* Individual message */
+.message {
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+/* Sender and timestamp container */
+.message-container {
+    display: flex;
+    overflow-x: hidden;
+}
+
+.message-sender-timestamp {
+    display: flex;
+}
+
+/* Profile picture */
+.profile-picture {
+    width: 30px; /* Adjust the width based on your preference */
+    height: 30px; /* Adjust the height based on your preference */
+    border-radius: 50%;
+    margin-right: 10px; /* Adjust the margin based on your preference */
+}
+  
+/* Sender's name */
+.message-sender {
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    margin-right: 5px;
+}
+  
+/* Timestamp */
+.message-timestamp {
+    font-size: .75rem;
+    color: #99aab5;
+    margin-top: 3px;
+}
+
+/* Message content */
+.message-content {
+    word-wrap: break-word;
+    color: white;
+    font-size: 16px;
+}
+  
+/* Message input and send button */
+.message-input {
+    display: flex;
+    margin-top: auto;
+    /* position: fixed; */
+    bottom: 0;
+}
+  
+.message-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #2c2f33;
+    color: #ffffff;
+    border-radius: 10px
+}
+  
+.message-input button {
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+  
+/* Hover effect on send button */
+.message-input button:hover {
+    background-color: #677bc4;
+}
+
+/* Remove outline on input focus */
+.message-input input:focus {
+    outline: none;
+}
+
+/* Scrollbar */
+.message-list::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Handle */
+.message-list::-webkit-scrollbar-thumb {
+    background: #3c6cf1; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Rounded corners of the handle */
+}
+
+/* Track */
+.message-list::-webkit-scrollbar-track {
+    background: #2c2f33; /* Color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners of the track */
 }

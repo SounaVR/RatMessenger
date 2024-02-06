@@ -6,6 +6,7 @@
 body {
     font-family: "Nunito", sans-serif;
     background: rgb(40, 40, 40);
+    overflow: hidden;
 }
 
 p {
@@ -16,6 +17,10 @@ p {
 h2 {
     color: white;
     margin-bottom: 0;
+}
+
+html::-webkit-scrollbar {
+    display: none;
 }
 
 /* CreateChannel Modal */
@@ -67,4 +72,8 @@ span.input-group-text, input.channelName, input.channelName:focus {
 
 .form-control::placeholder {
     color: rgb(138, 138, 138);
+}
+
+.black-text {
+    color: black !important;
 }

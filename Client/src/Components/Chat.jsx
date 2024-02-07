@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Auth } from '../Context/Auth';
 import { io } from 'socket.io-client';
-import { baseUrl, getRequest, postRequest } from '../Utils/Services';
+import { baseUrl, getRequest } from '../Utils/Services';
 import moment from 'moment';
 import pfp from '../Assets/avatar.jpg';
 
@@ -62,10 +62,7 @@ const Chat = ({ activeChannel }) => {
         // Fetch chat history from the server
         const fetchChatHistory = async () => {
             try {
-                const response = await getRequest(
-                    `${baseUrl}/app/servers/channels/messages/${activeChannel}`,
-                    user.token
-                );
+                const response = await getRequest(`${baseUrl}/app/servers/channels/messages/${activeChannel}`, user.token);
                 setMessages(response);
             } catch (error) {
                 console.error('Error fetching chat history:', error);

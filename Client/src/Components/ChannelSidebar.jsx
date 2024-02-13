@@ -3,7 +3,7 @@ import { App } from '../Context/App';
 import UserChannel from '../Components/app/UserChannel';
 import CreateChannel from '../Components/app/CreateChannel';
 
-const ChannelSidebar = ({ onChannelChange }) => {
+const ChannelSidebar = ({ onChannelChange, activeChannel }) => {
     const { userChannels } = useContext(App);
 
     const handleChannelClick = (channelId) => {
@@ -12,21 +12,19 @@ const ChannelSidebar = ({ onChannelChange }) => {
 
     return (
         <div className="channels-sidebar">
-            {!userChannels && (
-                    <p>Select or create a server first</p>
-                )}
-                {userChannels && (
-                    <div className="channels-list">
-                        <CreateChannel />
-                        {userChannels?.map((channel, i) => (
-                            <UserChannel
-                                key={i}
-                                channel={channel}
-                                onClick={() => handleChannelClick(channel._id)}
-                            />
-                        ))}
-                    </div>
-                )}
+            {userChannels && (
+                <div className="channels-list">
+                    <CreateChannel />
+                    {userChannels?.map((channel, i) => (
+                        <UserChannel
+                            key={i}
+                            channel={channel}
+                            onClick={() => handleChannelClick(channel._id)}
+                            isActive={channel._id === activeChannel}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

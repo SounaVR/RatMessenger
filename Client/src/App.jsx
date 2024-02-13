@@ -5,6 +5,7 @@ import { useContext } from 'react';
 //// Core Imports
 // Pages
 import Home from './Pages/Home';
+import MainApp from './Pages/MainApp';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Error from './Pages/Error';
@@ -24,10 +25,20 @@ function App() {
         <AppProvider user={ user }>
             <NavBar />
                 <Routes>
+                    {/* Home Page */}
                     <Route path='/channels/@me' element={ user ? <Home/> : <Login/> }/>
-                    <Route path='/login' element={ user ? <Home/> : <Login/> }/>
-                    <Route path='/register' element={ user ? <Home/> : <Register/> }/>
+
+                    {/* App Pages Handler */}
+                    <Route path='/channels/:serverId/:channelId' element={ user ? <MainApp/> : <Login/> }/>
+
+                    {/* Auth Logic */}
+                    <Route path='/login' element={ user ? <Navigate to="/channels/@me" /> : <Login/> }/>
+                    <Route path='/register' element={ user ? <Navigate to="/channels/@me" /> : <Register/> }/>
+                    
+                    {/* Fallback */}
                     <Route path='*' element={ <Navigate to="/channels/@me" /> }/>
+
+                    {/* Error Page */}
                     <Route path='/error' element={ <Error /> }/>
                 </Routes>
         </AppProvider>

@@ -5,7 +5,7 @@
 
 /* Sidebar styles */
 .servers-sidebar {
-    width: 75px;
+    min-width: 75px;
     background-color: rgb(53, 53, 53);
     overflow-y: scroll;
     align-items: center;
@@ -15,7 +15,6 @@
 }
 
 .channels-sidebar {
-    padding: 10px;
     background: rgb(58, 58, 58);
     max-width: 170px;
 }
@@ -59,10 +58,11 @@
     transition: background-color 0.1s ease;
     overflow: hidden;
     white-space: nowrap;
+    user-select: none;
 }
   
 .user-channel:hover {
-    background-color: rgb(53, 53, 53);
+    background-color: #3c6cf1;
 }
 
 .user-channel p {
@@ -70,6 +70,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.active-channel {
+    background-color: #3c6cf1;
 }
 
 
@@ -83,6 +87,7 @@
     overflow-x: hidden;
     flex-direction: column;
     background-color: rgb(43, 43, 43);
+    min-width: 300px;
 }
   
 /* Chat header */
@@ -197,4 +202,39 @@
 .message-list::-webkit-scrollbar-track {
     background: #2c2f33; /* Color of the scrollbar track */
     border-radius: 10px; /* Rounded corners of the track */
+}
+
+
+
+/* User List Section */
+.user-list {
+    display: block;
+    min-width: 150px;
+    padding: 10px;
+}
+
+.users {
+    padding: 1px;
+    user-select: none;
+}
+
+.member {
+    display: flex;
+    cursor: pointer;
+    color: white;
+}
+
+.app-container .user-profile-popup {
+    position: fixed;
+    background-color: black;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 5px 0;
+    z-index: 2;
+    max-width: 200px;
+    text-align: center;
+    border-radius: 6px;
+    top: 100px;
+    right: 160px;
 }

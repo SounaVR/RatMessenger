@@ -6,7 +6,7 @@ import { baseUrl, getRequest } from '../Utils/Services';
 import moment from 'moment';
 import pfp from '../Assets/avatar.jpg';
 
-const Chat = ({ activeChannel }) => {
+const Chat = ({ activeChannel, serverId }) => {
     const { user } = useContext(Auth);
 
     const messageListRef = useRef(null);
@@ -87,7 +87,7 @@ const Chat = ({ activeChannel }) => {
 
     return (
         <div className="chat">
-            { activeChannel ? (
+            {activeChannel && (
                 <>
                     <h2>{activeChannel}</h2>
                     <div className="message-list"  ref={messageListRef}>
@@ -120,8 +120,6 @@ const Chat = ({ activeChannel }) => {
                         <button onClick={handleMessageSubmit}>Send</button>
                     </div>
                 </>
-            ) : (
-                <p>Select a channel to start chatting</p>
             )}
         </div>
     );

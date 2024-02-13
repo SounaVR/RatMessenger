@@ -2,7 +2,7 @@
 const express = require('express');
 const { createServer, findUserServers, createChannel, findChannel } = require('../Controllers/servers');
 const { createMessage, getMessages } = require('../Controllers/messages');
-const { registration, authentication, findUser } = require('../Controllers/users');
+const { registration, authentication, findUser, fetchMembers } = require('../Controllers/users');
 
 const router = express.Router();
 
@@ -28,6 +28,7 @@ const authenticateUser = (req, res, next) => {
 router.post('/users/register', registration);
 router.post('/users/login', authentication);
 router.get('/users/:userID', authenticateUser, findUser);
+router.get('/servers/members/:serverId', authenticateUser, fetchMembers);
 
 // Routes servers
 router.post('/servers/create', authenticateUser, createServer);

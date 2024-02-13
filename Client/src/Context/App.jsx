@@ -11,7 +11,6 @@ export const AppProvider = ({ children, user }) => {
     const [serverInfo, setServerInfo] = useState({ serverName: "", userId: "" });
     // Channels States
     const [userChannels, setUserChannels] = useState(null);
-    const [isChannelsNotLoading, setIsChannelsNotLoading] = useState(false);
     const [channelError, setChannelError] = useState(null);
     const [channelInfo, setChannelInfo] = useState({ serverId: "", channelName: "", channelType: "Text" });
 
@@ -37,33 +36,6 @@ export const AppProvider = ({ children, user }) => {
 
         getUserServers();
     }, [user]);
-
-    useEffect(() => {
-        const getUserChannels = async () => {
-            if (user?._id) {
-                // Starts loading process
-                setChannelError(null);
-
-                // GET request to the API
-                const response = await getRequest(`${baseUrl}/app/servers/channels/${channelInfo?.serverId}`, user.token);
-                
-                if (Array.isArray(response)) {
-                    // Done loading
-                    setUserChannels(response);
-                } else {
-                    console.error("Invalid data format received:", response);
-                }
-                
-                // Returns error, if any, stops the loading
-                if (response.error) {
-                    return setChannelError(response);
-                }
-            }
-        }
-
-            getUserChannels();
-            setIsChannelsNotLoading(false);
-    }, [isChannelsNotLoading]);
 
     const updateServerInfo = useCallback((info) => {
         setServerInfo(info);
@@ -91,8 +63,31 @@ export const AppProvider = ({ children, user }) => {
         }
 
         setUserChannels((prev) => [...prev, response]);
-        setIsChannelsNotLoading(true);
     }, [channelInfo]);
+
+    const getUserChannels = async (serverId) => {
+        if (user?._id) {
+            try {
+                // Starts loading process
+                setChannelError(null);
+
+                // GET request to the API
+                const response = await getRequest(`${baseUrl}/app/servers/channels/${serverId}`, user.token);
+                
+                if (Array.isArray(response)) {
+                    // Done loading
+                    setUserChannels(response);
+                } else {
+                    console.error("Invalid data format received:", response);
+                }
+                return response;
+            } catch (error) {
+                setChannelError(error);
+
+                return { error };
+            }
+        }
+    }
 
     return (
         <App.Provider
@@ -105,12 +100,13 @@ export const AppProvider = ({ children, user }) => {
                 updateServerInfo,
 
                 userChannels,
-                isChannelsNotLoading,
-                setIsChannelsNotLoading,
+                setUserChannels,
                 channelError,
                 createChannel,
                 channelInfo,
-                updateChannelInfo
+                updateChannelInfo,
+
+                getUserChannels
             }}
         >
             { children }
